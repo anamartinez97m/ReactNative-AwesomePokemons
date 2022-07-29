@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import {
 	FlatList,
 	SectionList,
+	SectionListRenderItem,
 	StatusBar,
 	StyleSheet,
 	Text,
@@ -93,7 +94,7 @@ function HomeScreen() {
 		getPokemonTypes();
 	}, []);
 
-	const Item = ({ title }) => (
+	const Item: React.FunctionComponent<any> = ({ title }) => (
 		<View style={styles.item}>
 		  <Text style={styles.title}>{title}</Text>
 		</View>
