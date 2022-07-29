@@ -55,9 +55,7 @@ const App = () => {
 						let iconName = '';
 			
 						if (route.name === 'Home') {
-							iconName = focused
-								? 'information-circle'
-								: 'information-circle-outline';
+							iconName = focused ? 'information-circle' : 'information-circle-outline';
 						} else if (route.name === 'Settings') {
 							iconName = 'list';
 						}
