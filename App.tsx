@@ -28,7 +28,6 @@ function HomeScreen() {
 	const [isLoading, setLoading] = useState(true);
 	const [data, setData] = useState([]);
 	const [selected, setSelected] = useState(null);
-	// const sectionData: { title: string; data: string[]; }[] = [];
 	const sectionData: any = [];
 
 	const getPokemonTypes = async () => {
@@ -44,7 +43,6 @@ function HomeScreen() {
 					data: ['hola','hey','hello']
 				});
  			});
-			console.log(json.results);
 			setData(json && json.results ? sectionData : []);
 		} catch (error) {
 			console.error(error);
@@ -88,12 +86,20 @@ function HomeScreen() {
 		const color = section.id === selected ? 'white' : 'black';
 	
 		return (
-		  	<HeaderItem
-			  	section={section}
-				onPress={() => setSelected(section.id)}
-				backgroundColor={{ backgroundColor }}
-				textColor={{ color }}
-		  	/>
+			<>
+				<HeaderItem
+					section={section}
+					onPress={() => setSelected(section.id)}
+					backgroundColor={{ backgroundColor }}
+					textColor={{ color }}
+				/>
+				<FlatList
+					horizontal
+					data={section.data}
+					renderItem={renderItem}
+					showsHorizontalScrollIndicator={false}
+				/>
+			</>
 		);
 	};
 
@@ -102,8 +108,11 @@ function HomeScreen() {
 			<SectionList
 				sections={data}
 				keyExtractor={(index) => index}
-				renderItem={renderItem}
 				renderSectionHeader={renderHeader}
+				renderItem={({ item, section }) => {
+					return null;
+				}}
+				// renderItem={renderItem}
 			/>
 	  	</View>
 	);
