@@ -36,11 +36,15 @@ function HomeScreen() {
 			const response = await fetch('https://pokeapi.co/api/v2/type/');
 			const json = await response.json();
 			json.results.forEach((element: any) => {
- 				sectionData.push({title: element.name, data: []});
+				const regex = new RegExp('\\/\\d+');
+				const elementId = (element.url.match(regex)).toString().slice(1);
+ 				sectionData.push({
+					id: elementId,
+					title: element.name, 
+					data: ['hola','hey','hello']
+				});
  			});
- 			// console.log('sectionData: ', sectionData);
- 			console.log('data: ', json.results);
-			// setData(json ? json.results : []);
+			console.log(json.results);
 			setData(json && json.results ? sectionData : []);
 		} catch (error) {
 			console.error(error);
@@ -55,24 +59,43 @@ function HomeScreen() {
 
 	const Item: React.FunctionComponent<any> = ({ item, onPress, backgroundColor, textColor }) => (
 		<TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
-			{/* <Text style={[styles.title, textColor]}>{item.name.toUpperCase()}</Text> */}
-			<Text style={[styles.title, textColor]}>{item.title}</Text>
+			<Text style={[styles.title, textColor]}>{item}</Text>
+		</TouchableOpacity>
+	);
+
+	const HeaderItem: React.FunctionComponent<any> = ({ section, onPress, backgroundColor, textColor }) => (
+		<TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
+			<Text style={[styles.header, textColor]}>{section.title.toUpperCase()}</Text>
 		</TouchableOpacity>
 	);
 
 	const renderItem = ({ item }: any) => {
-		const backgroundColor = item.name === selected ? "#6e3b6e" : "#fff";
-		const color = item.name === selected ? 'white' : 'black';
+		const backgroundColor = item === selected ? "#6e3b6e" : "#fff";
+		const color = item === selected ? 'white' : 'black';
 	
 		return (
-		  <Item
-			item={item}
-			onPress={() => setSelected(item.name)}
-			backgroundColor={{ backgroundColor }}
-			textColor={{ color }}
-		  />
+		  	<Item
+				item={item}
+				onPress={() => setSelected(item)}
+				backgroundColor={{ backgroundColor }}
+				textColor={{ color }}
+		  	/>
 		);
-	  };
+	};
+
+	const renderHeader = ({ section }: any) => {
+		const backgroundColor = section.id === selected ? "#6e3b6e" : "#fff";
+		const color = section.id === selected ? 'white' : 'black';
+	
+		return (
+		  	<HeaderItem
+			  	section={section}
+				onPress={() => setSelected(section.id)}
+				backgroundColor={{ backgroundColor }}
+				textColor={{ color }}
+		  	/>
+		);
+	};
 
 	return (
 	  	<View style={styles.container}>
@@ -80,15 +103,8 @@ function HomeScreen() {
 				sections={data}
 				keyExtractor={(index) => index}
 				renderItem={renderItem}
-				renderSectionHeader={({ section: { title } }) => (
-					<Text style={styles.header}>{title}</Text>
-				)}
+				renderSectionHeader={renderHeader}
 			/>
-			{/* <FlatList
-				data={data}
-				keyExtractor={(item: any) => item.name}
-				renderItem={ renderItem }
-        	/> */}
 	  	</View>
 	);
   }
@@ -142,8 +158,7 @@ const styles = StyleSheet.create({
         marginVertical: 8
     },
 	header: {
-		fontSize: 28,
-		backgroundColor: "#fff",
+		fontSize: 24,
 		marginVertical: 8
 	},
     title: {
