@@ -40,7 +40,7 @@ function HomeScreen() {
  				sectionData.push({
 					id: elementId,
 					title: element.name, 
-					data: ['hola','hey','hello']
+					data: ['hola','hey','hello','hi','holiwi','saludos','good morning','good night','bye']
 				});
  			});
 			setData(json && json.results ? sectionData : []);
@@ -112,7 +112,6 @@ function HomeScreen() {
 				renderItem={({ item, section }) => {
 					return null;
 				}}
-				// renderItem={renderItem}
 			/>
 	  	</View>
 	);
@@ -142,12 +141,12 @@ const App = () => {
 			
 						return <Ionicons name={iconName} size={size} color={color} />;
 					},
-					tabBarActiveTintColor: 'tomato',
+					tabBarActiveTintColor: 'purple',
 					tabBarInactiveTintColor: 'gray',
 					})
 				}
 			>
-				<Tab.Screen name="Home" component={HomeScreen} />
+				<Tab.Screen name="Homee" component={HomeScreen} />
 				<Tab.Screen name="Settings" component={SettingsScreen} />
 			</Tab.Navigator>
 		</NavigationContainer>
@@ -164,7 +163,8 @@ const styles = StyleSheet.create({
     item: {
         backgroundColor: '#fff',
         padding: 5,
-        marginVertical: 8
+        marginVertical: 8,
+		marginRight: 4
     },
 	header: {
 		fontSize: 24,
