@@ -7,3 +7,5 @@ I18n.translations = {
   en,
   es,
 };
+
+export default I18n;

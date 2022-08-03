@@ -7,6 +7,8 @@
 import React, { useEffect, useState } from 'react';
 import {
 	FlatList,
+	Image,
+	SafeAreaView,
 	SectionList,
 	SectionListRenderItem,
 	StatusBar,
@@ -19,10 +21,45 @@ import {
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from '@react-navigation/stack';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Ionicons } from '@expo/vector-icons';
 // TODO: not working
 // import HomeScreen from './HomeScreen';
 import SettingsScreen from './SettingsScreen';
+import I18n from './i18n/i18n';
+import styles from './Styles';
+import { UserLogin } from './UserLogin';
+import { UserRegistration } from './UserRegistration';
+// import BottomTabNavigator from './BottomTabNavigator';
+
+const Tab = createBottomTabNavigator();
+
+const BottomTabNavigator = () => {
+    return (
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                // tabBarIcon: ({ focused, color, size }) => {
+                    // let iconName = '';
+        
+                    // if (route.name === 'Home') {
+                    // 	iconName = focused ? 'information-circle' : 'information-circle-outline';
+                    // } else if (route.name === 'Settings') {
+                    // 	iconName = 'list';
+                    // }
+        
+                    // return <Ionicons name='list' size={size} color={color} />;
+                // },
+                tabBarActiveTintColor: 'purple',
+                tabBarInactiveTintColor: 'gray',
+                })
+            }
+        >
+            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name={I18n.t('settings')} component={SettingsScreen} />
+        </Tab.Navigator>
+    );
+};
 
 function HomeScreen() {
 	const [isLoading, setLoading] = useState(true);
@@ -104,7 +141,7 @@ function HomeScreen() {
 	};
 
 	return (
-	  	<View style={styles.container}>
+		<View style={styles.container}>
 			<SectionList
 				sections={data}
 				keyExtractor={(index) => index}
@@ -113,11 +150,33 @@ function HomeScreen() {
 					return null;
 				}}
 			/>
-	  	</View>
+		</View>
+	);
+}
+
+function UserRegistrationScreen() {
+	return (
+	  <>
+		<StatusBar />
+		<SafeAreaView>
+		  <UserRegistration />
+		</SafeAreaView>
+	  </>
+	);
+}
+
+function UserLogInScreen() {
+	return (
+	  <>
+		<StatusBar />
+		<SafeAreaView>
+		  <UserLogin />
+		</SafeAreaView>
+	  </>
 	);
   }
 
-const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const App = () => {
 	const isDarkMode = useColorScheme() === 'dark';
@@ -128,52 +187,13 @@ const App = () => {
 
 	return (
 		<NavigationContainer>
-			<Tab.Navigator
-				screenOptions={({ route }) => ({
-					tabBarIcon: ({ focused, color, size }) => {
-						let iconName = '';
-			
-						if (route.name === 'Home') {
-							iconName = focused ? 'information-circle' : 'information-circle-outline';
-						} else if (route.name === 'Settings') {
-							iconName = 'list';
-						}
-			
-						return <Ionicons name={iconName} size={size} color={color} />;
-					},
-					tabBarActiveTintColor: 'purple',
-					tabBarInactiveTintColor: 'gray',
-					})
-				}
-			>
-				<Tab.Screen name="Homee" component={HomeScreen} />
-				<Tab.Screen name="Settings" component={SettingsScreen} />
-			</Tab.Navigator>
+			<Stack.Navigator>
+				<Stack.Screen name="Login" component={UserLogInScreen} />
+        		<Stack.Screen name="Register" component={UserRegistrationScreen} />
+				<Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
+      		</Stack.Navigator>
 		</NavigationContainer>
 	);
 };
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: StatusBar.currentHeight,
-        paddingBottom: 5,
-        marginHorizontal: 16
-    },
-    item: {
-        backgroundColor: '#fff',
-        padding: 5,
-        marginVertical: 8,
-		marginRight: 4
-    },
-	header: {
-		fontSize: 24,
-		marginVertical: 8
-	},
-    title: {
-        fontSize: 18,
-        color: 'black'
-    }
-});
 
 export default App;

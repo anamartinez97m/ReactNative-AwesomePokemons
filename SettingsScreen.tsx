@@ -1,12 +1,42 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useContext, useState } from 'react';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
-import { CheckBox } from "@rneui/themed";
+import { CheckBox } from '@rneui/themed';
+// import { Updates } from 'expo';
+import i18n from './i18n/i18n';
+import en from './i18n/locales/en';
+import es from './i18n/locales/es';
+import styles from './Styles';
 
 type CheckboxComponentProps = {};
 
 const CheckboxComponent: React.FunctionComponent<CheckboxComponentProps> = () => {
     let [checkEnglish, setCheckEnglish] = useState(false);
     let [checkSpanish, setCheckSpanish] = useState(false);
+
+    // const {language, setLanguage} = useContext(global.LanguageContext);
+
+    // const onChangeLanguage = (value: any) => {
+        // setLanguage(value)
+        // changeLanguage(value)
+        // setTimeout(() => Updates.reload(),500)
+    // }
+
+    // const changeLanguage = async (lang: any) => {
+        // setI18nConfig(lang);
+        // AsyncStorage.setItem('language', lang);
+    // };
+
+    const setI18nConfig = (lang: any) => {
+        // fallback if no available language fits
+        const fallback = { languageTag: 'en', isRTL: false };
+      
+        // clear translation cache
+        // translate.cache.clear();
+        // update layout directio
+        // set i18n-js config
+        i18n.translations = { en, es };
+        i18n.locale = lang;
+    };
 
     return (
         <>
@@ -38,23 +68,5 @@ class SettingsScreen extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    checkboxsContainer: {
-        flex: 1,
-        paddingTop: StatusBar.currentHeight,
-        paddingBottom: 5,
-        marginHorizontal: 16
-    },
-    checkboxsTitle: {
-        padding: 5,
-        marginVertical: 8,
-        fontSize: 24,
-        color: 'black'
-    },
-    checkbox: {
-        tintColor: 'pink'
-    }
-});
 
 export default SettingsScreen;

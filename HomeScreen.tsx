@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, StatusBar, StyleSheet, Text, View } from 'react-native';
+import styles from './Styles';
 
 const [isLoading, setLoading] = useState(true);
 const [data, setData] = useState([]);
@@ -83,24 +84,6 @@ class HomeScreen extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: StatusBar.currentHeight,
-        paddingBottom: 5,
-        marginHorizontal: 16
-    },
-    item: {
-        backgroundColor: '#fff',
-        padding: 5,
-        marginVertical: 8
-    },
-    title: {
-        fontSize: 18,
-        color: 'black'
-    }
-});
 
 export default HomeScreen;
   
