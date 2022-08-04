@@ -187,10 +187,15 @@ const App = () => {
 
 	return (
 		<NavigationContainer>
-			<Stack.Navigator>
+			<Stack.Navigator 
+				screenOptions={() => ({
+					headerShown: false
+					})
+				}
+			>
 				<Stack.Screen name="Login" component={UserLogInScreen} />
         		<Stack.Screen name="Register" component={UserRegistrationScreen} />
-				<Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
+				<Stack.Screen name="Welcome!" component={BottomTabNavigator} />
       		</Stack.Navigator>
 		</NavigationContainer>
 	);
