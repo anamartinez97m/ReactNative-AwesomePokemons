@@ -1,13 +1,11 @@
 import React, {FC, ReactElement, useState} from 'react';
 import {
-    Alert,
-    Image,
+  Image,
     Text,
     TextInput,
     TouchableOpacity,
     View,
 } from 'react-native';
-import Parse from 'parse/react-native';
 import styles from './Styles';
 import { useNavigation } from '@react-navigation/native';
 
@@ -17,10 +15,11 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
 
   const navigation = useNavigation();
 
-//   const doUserLogIn = async function (): Promise<boolean> {
-//     // Note that these values come from state variables that we've declared before
-//     const usernameValue: string = username;
-//     const passwordValue: string = password;
+  const doUserLogIn = async function () {
+    const usernameValue: string = username;
+    const passwordValue: string = password;
+
+    console.log(usernameValue);
 
 //     return await Parse.User.logIn(usernameValue, passwordValue)
 //       .then(async (loggedInUser: Parse.User) => {
@@ -39,11 +38,16 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
 //         Alert.alert('Error!');
 //         return false;
 //       });
-//   };
+  };
 
   return (
-    <View>
-      <View>
+    <View style={[styles.loginContainer]}>
+      <Image
+        resizeMode="contain"
+        source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+        style={[styles.logoImageStyle]}
+      />
+      <View style={[styles.loginTextInputContainer]}>
         <TextInput
           value={username}
           placeholder={'Username'}
@@ -56,23 +60,26 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
           placeholder={'Password'}
           secureTextEntry
           onChangeText={(text) => setPassword(text)}
+          style={[styles.passwordTextInputContainer]}
         />
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity style={[styles.loginButton]} onPress={() => {}}>
           <View>
-            <Text onPress={() => navigation.navigate('TabNavigator')}>{'Sign in'}</Text>
+            <Text 
+              style={[styles.loginText]}
+              onPress={() => navigation.navigate('Welcome!')}>{'Sign in'}</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View>
-        <View>
-          <View/>
-          <Text>{'or'}</Text>
-          <View/>
+        <View style={[styles.loginSeparator]}>
+          <Text style={[styles.loginSeparatorText]}>{'or'}</Text>
         </View>
         <View>
-          <TouchableOpacity onPress={() => {}}>
+          <TouchableOpacity style={[styles.loginButton]} onPress={() => {}}>
             <View>
-              <Text onPress={() => navigation.navigate('Register')}>{'Sign up'}</Text>
+              <Text 
+                style={[styles.loginText]} 
+                onPress={() => navigation.navigate('Register')}>{'Create an account'}</Text>
             </View>
           </TouchableOpacity>
         </View>

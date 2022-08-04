@@ -46,7 +46,7 @@ export const UserRegistration = () => {
         secureTextEntry
         onChangeText={(text) => setPassword(text)}
       />
-      <Button title={"Sign Up"} onPress={() => navigation.navigate('TabNavigator')} />
+      <Button title={"Sign Up"} onPress={() => navigation.navigate('Welcome!')} />
     </>
   );
 };
