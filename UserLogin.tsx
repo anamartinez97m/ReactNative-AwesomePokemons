@@ -44,7 +44,8 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
     <View style={[styles.loginContainer]}>
       <Image
         resizeMode="contain"
-        source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+        // source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+        source={require('./pokemon_logo.png')}
         style={[styles.logoImageStyle]}
       />
       <View style={[styles.loginTextInputContainer]}>
