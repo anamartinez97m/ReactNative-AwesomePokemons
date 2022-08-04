@@ -13,6 +13,12 @@ const CheckboxComponent: React.FunctionComponent<CheckboxComponentProps> = () =>
     let [checkEnglish, setCheckEnglish] = useState(false);
     let [checkSpanish, setCheckSpanish] = useState(false);
 
+    // const selectedLanguageCode = i18n.language;
+    const selectedLanguageCode = 'en';
+    console.log(selectedLanguageCode);
+    checkEnglish = selectedLanguageCode == 'en';
+    checkSpanish = selectedLanguageCode != 'en';
+
     // const {language, setLanguage} = useContext(global.LanguageContext);
 
     // const onChangeLanguage = (value: any) => {
