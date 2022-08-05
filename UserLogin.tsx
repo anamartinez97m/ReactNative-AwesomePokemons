@@ -1,5 +1,6 @@
 import React, {FC, ReactElement, useState} from 'react';
 import {
+  Alert,
   Image,
     Text,
     TextInput,
@@ -8,6 +9,9 @@ import {
 } from 'react-native';
 import styles from './Styles';
 import { useNavigation } from '@react-navigation/native';
+import { openDatabase } from 'react-native-sqlite-storage';
+
+const db = openDatabase({ name: 'UserDatabase.db' });
 
 export const UserLogin: FC<{}> = ({}): ReactElement => {
   const [username, setUsername] = useState("");
@@ -15,29 +19,35 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
 
   const navigation = useNavigation();
 
-  const doUserLogIn = async function () {
+  const doUserLogin = async () => {
     const usernameValue: string = username;
     const passwordValue: string = password;
 
-    console.log(usernameValue);
+    if (!usernameValue) {
+      Alert.alert('Please fill username');
+      return;
+    }
 
-//     return await Parse.User.logIn(usernameValue, passwordValue)
-//       .then(async (loggedInUser: Parse.User) => {
-//         // logIn returns the corresponding ParseUser object
-//         Alert.alert(
-//           'Success!',
-//           `User ${loggedInUser.get('username')} has successfully signed in!`,
-//         );
-//         // To verify that this is in fact the current user, currentAsync can be used
-//         const currentUser: Parse.User = await Parse.User.currentAsync();
-//         console.log(loggedInUser === currentUser);
-//         return true;
-//       })
-//       .catch((error: object) => {
-//         // Error can be caused by wrong parameters or lack of Internet connection
-//         Alert.alert('Error!');
-//         return false;
-//       });
+    if (!passwordValue) {
+      Alert.alert('Please fill password');
+      return;
+    }
+
+    db.transaction((tx: any) => {
+      tx.executeSql(
+        'SELECT * FROM table_user where username = ? and password = ?',
+        [username, password],
+        (tx: any, results: any) => {
+          var len = results.rows.length;
+          if (len > 0) {
+            navigation.navigate('TabNavigator');
+          } else {
+            Alert.alert('No user found');
+          }
+        }
+      );
+    });
+
   };
 
   return (
@@ -67,7 +77,7 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
           <View>
             <Text 
               style={[styles.loginText]}
-              onPress={() => navigation.navigate('Welcome!')}>{'Sign in'}</Text>
+              onPress={() => doUserLogin()}>{'Sign in'}</Text>
           </View>
         </TouchableOpacity>
       </View>

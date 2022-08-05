@@ -32,7 +32,9 @@ import styles from './Styles';
 import { UserLogin } from './UserLogin';
 import { UserRegistration } from './UserRegistration';
 // import BottomTabNavigator from './BottomTabNavigator';
+import { openDatabase } from 'react-native-sqlite-storage';
 
+const db = openDatabase({ name: 'UserDatabase.db' });
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
@@ -179,6 +181,40 @@ function UserLogInScreen() {
 const Stack = createStackNavigator();
 
 const App = () => {
+	useEffect(() => {
+		db.transaction((txn: any) => {
+			txn.executeSql(
+				"SELECT name FROM sqlite_master WHERE type='table' AND name='table_user'",
+				[],
+				(tx: any, res: any) => {
+					if (res.rows.length == 0) {
+						txn.executeSql('DROP TABLE IF EXISTS table_user', []);
+						txn.executeSql(
+						'CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, username VARCHAR(20), password VARCHAR(255))',
+						[]
+						);
+					}
+				}
+		  	);
+		});
+	}, []);
+
+	// To view all users
+	useEffect(() => {
+		db.transaction((tx: any) => {
+		  tx.executeSql(
+			'SELECT * FROM table_user',
+			[],
+			(tx: any, results: any) => {
+			  var temp = [];
+			  for (let i = 0; i < results.rows.length; ++i)
+				temp.push(results.rows.item(i));
+			  console.log(temp);
+			}
+		  );
+		});
+	  }, []);
+
 	const isDarkMode = useColorScheme() === 'dark';
 
 	const backgroundStyle = {
@@ -195,7 +231,7 @@ const App = () => {
 			>
 				<Stack.Screen name="Login" component={UserLogInScreen} />
         		<Stack.Screen name="Register" component={UserRegistrationScreen} />
-				<Stack.Screen name="Welcome!" component={BottomTabNavigator} />
+				<Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
       		</Stack.Navigator>
 		</NavigationContainer>
 	);
