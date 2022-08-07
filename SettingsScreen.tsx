@@ -9,29 +9,11 @@ import styles from './Styles';
 import I18n from './i18n/i18n';
 
 const LanguageButtonsComponent: React.FunctionComponent = () => {
-    console.log(i18n.locale);
-    const selectedLanguageCode = i18n.locale;
-    const selectedLanguage = 
-        (selectedLanguageCode === 'en') ? I18n.t('language_english') : I18n.t('language_spanish');
-
-    // const {language, setLanguage} = useContext(global.LanguageContext);
-
-    const onChangeLanguage = (value: any) => {
-        console.log(value);
-        changeLanguage(value)
-     // setTimeout(() => Updates.reload(),500)
-    }
+    const [selectedLanguageCode, setSelectedLanguageCode] = useState('');
 
     const changeLanguage = async (lang: any) => {
         i18n.locale = lang;
-        // setI18nConfig(lang);
         // AsyncStorage.setItem('language', lang);
-    };
-
-    const setI18nConfig = (lang: any) => {
-        const fallback = { languageTag: 'en', isRTL: false };
-        i18n.translations = { en, es };
-        i18n.locale = lang;
     };
 
     return (
@@ -40,24 +22,29 @@ const LanguageButtonsComponent: React.FunctionComponent = () => {
                 <Text style={[styles.languageTitle]}>{I18n.t('select_language')}</Text>
                 <TouchableOpacity 
                 style={[styles.languageButton]} 
-                onPress={() => {console.log('pulsado ingles')}}>
+                onPress={() => {
+                    changeLanguage('en');
+                    setSelectedLanguageCode('en');
+                }}>
                     <View>
-                        <Text 
-                        style={[styles.languageText]}
-                        onPress={() => {}}>{I18n.t('language_english')}</Text>
+                        <Text style={[styles.languageText]}>{I18n.t('language_english')}</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity 
                 style={[styles.languageButton]} 
-                onPress={() => {}}>
+                onPress={() => {
+                    changeLanguage('es');
+                    setSelectedLanguageCode('es');
+                }}>
                     <View>
-                        <Text 
-                        style={[styles.languageText]} 
-                        onPress={() => console.log('pulsado español')}>{I18n.t('language_spanish')}</Text>
+                        <Text style={[styles.languageText]}>{I18n.t('language_spanish')}</Text>
                     </View>
                 </TouchableOpacity>
                 <Text style={[styles.currentLanguage]}>{I18n.t('current_language')}</Text>
-                <Text style={[styles.currentLanguage]}>{selectedLanguage}</Text>
+                <Text style={[styles.currentLanguage]}>
+                    {selectedLanguageCode === 'en' ? 
+                        I18n.t('language_english') : I18n.t('language_spanish')}
+                </Text>
             </View>
         </>
     );

@@ -32,7 +32,7 @@ export const UserRegistration = () => {
         'INSERT INTO table_user (username, password) VALUES (?,?)',
         [username, password],
         (tx: any, results: any) => {
-          console.log('Results', results.rowsAffected);
+          // console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
             Alert.alert(
               I18n.t('success'),
