@@ -1,3 +1,20 @@
 export default {
-    settings: 'Ajustes'
+    home: 'Home',
+    settings: 'Ajustes',
+    fill_username: 'Por favor, rellene el nombre de usuario',
+    fill_password: 'Por favor, rellene la contraseña',
+    no_user: 'No se ha encontrado el usuario',
+    username: 'Nombre de usuario',
+    password: 'Contraseña',
+    sign_in: 'Iniciar sesión',
+    common_or: 'o',
+    create_account: 'Crear una cuenta',
+    sign_up: 'Registrar',
+    registration_failed: 'El registro ha fallado',
+    success: 'Correcto',
+    registration_correct: 'El registro se ha hecho correctamente',
+    select_language: '¡Selecciona el idioma!',
+    language_spanish: 'Español',
+    language_english: 'Inglés',
+    current_language: 'Idioma seleccionado actualmente:'
 };

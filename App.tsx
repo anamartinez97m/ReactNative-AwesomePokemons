@@ -57,7 +57,7 @@ const BottomTabNavigator = () => {
                 })
             }
         >
-            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name={I18n.t('home')} component={HomeScreen} />
             <Tab.Screen name={I18n.t('settings')} component={SettingsScreen} />
         </Tab.Navigator>
     );
@@ -167,7 +167,7 @@ function UserRegistrationScreen() {
 	);
 }
 
-function UserLogInScreen() {
+function UserLoginScreen() {
 	return (
 	  <>
 		<StatusBar />
@@ -229,7 +229,7 @@ const App = () => {
 					})
 				}
 			>
-				<Stack.Screen name="Login" component={UserLogInScreen} />
+				<Stack.Screen name="Login" component={UserLoginScreen} />
         		<Stack.Screen name="Register" component={UserRegistrationScreen} />
 				<Stack.Screen name="TabNavigator" component={BottomTabNavigator} />
       		</Stack.Navigator>
