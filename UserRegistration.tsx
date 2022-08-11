@@ -1,9 +1,9 @@
-import React, { FC, ReactElement, useState } from 'react';
-import { Alert, Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { openDatabase } from 'react-native-sqlite-storage';
 import styles from './Styles';
-import I18n from './i18n/i18n';
+import i18n from './i18n/i18n';
 
 const db = openDatabase({ name: 'UserDatabase.db' });
 
@@ -18,12 +18,12 @@ export const UserRegistration = () => {
     const passwordValue: string = password;
 
     if (!usernameValue) {
-      Alert.alert(I18n.t('fill_username'));
+      Alert.alert(i18n.t('fill_username'));
       return;
     }
 
     if (!passwordValue) {
-      Alert.alert(I18n.t('fill_password'));
+      Alert.alert(i18n.t('fill_password'));
       return;
     }
 
@@ -35,8 +35,8 @@ export const UserRegistration = () => {
           // console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
             Alert.alert(
-              I18n.t('success'),
-              I18n.t('registration_correct'),
+              i18n.t('success'),
+              i18n.t('registration_correct'),
               [
                 {
                   text: 'Ok',
@@ -45,7 +45,7 @@ export const UserRegistration = () => {
               ],
               { cancelable: false }
             );
-          } else Alert.alert(I18n.t('registration_failed'));
+          } else Alert.alert(i18n.t('registration_failed'));
         }
       );
     });
@@ -57,14 +57,14 @@ export const UserRegistration = () => {
         <View style={[styles.loginTextInputContainer]}>
           <TextInput
             value={username}
-            placeholder={I18n.t('username')}
+            placeholder={i18n.t('username')}
             onChangeText={(text) => setUsername(text)}
             autoCapitalize={'none'}
             keyboardType={'email-address'}
           />
           <TextInput
             value={password}
-            placeholder={I18n.t('password')}
+            placeholder={i18n.t('password')}
             secureTextEntry
             onChangeText={(text) => setPassword(text)}
             style={[styles.passwordTextInputContainer]}
@@ -75,7 +75,7 @@ export const UserRegistration = () => {
           style={[styles.loginButton]} 
           onPress={() => doUserRegistration()}>
             <View>
-              <Text style={[styles.loginText]}>{I18n.t('sign_up')}</Text>
+              <Text style={[styles.loginText]}>{i18n.t('sign_up')}</Text>
             </View>
           </TouchableOpacity>
         </View>

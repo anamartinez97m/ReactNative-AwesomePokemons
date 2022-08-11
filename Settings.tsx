@@ -1,25 +1,26 @@
 import React, { Component, useContext, useState } from 'react';
 import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { CheckBox } from '@rneui/themed';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { Updates } from 'expo';
 import i18n from './i18n/i18n';
 import en from './i18n/locales/en';
 import es from './i18n/locales/es';
 import styles from './Styles';
-import I18n from './i18n/i18n';
+import RNRestart from 'react-native-restart';
 
 const LanguageButtonsComponent: React.FunctionComponent = () => {
     const [selectedLanguageCode, setSelectedLanguageCode] = useState('');
 
     const changeLanguage = async (lang: any) => {
         i18n.locale = lang;
-        // AsyncStorage.setItem('language', lang);
+        AsyncStorage.setItem('language', lang);
+        RNRestart.Restart();
     };
 
     return (
         <>
             <View style={[styles.languageContainer]}>
-                <Text style={[styles.languageTitle]}>{I18n.t('select_language')}</Text>
+                <Text style={[styles.languageTitle]}>{i18n.t('select_language')}</Text>
                 <TouchableOpacity 
                 style={[styles.languageButton]} 
                 onPress={() => {
@@ -27,7 +28,7 @@ const LanguageButtonsComponent: React.FunctionComponent = () => {
                     setSelectedLanguageCode('en');
                 }}>
                     <View>
-                        <Text style={[styles.languageText]}>{I18n.t('language_english')}</Text>
+                        <Text style={[styles.languageText]}>{i18n.t('language_english')}</Text>
                     </View>
                 </TouchableOpacity>
                 <TouchableOpacity 
@@ -37,25 +38,24 @@ const LanguageButtonsComponent: React.FunctionComponent = () => {
                     setSelectedLanguageCode('es');
                 }}>
                     <View>
-                        <Text style={[styles.languageText]}>{I18n.t('language_spanish')}</Text>
+                        <Text style={[styles.languageText]}>{i18n.t('language_spanish')}</Text>
                     </View>
                 </TouchableOpacity>
-                <Text style={[styles.currentLanguage]}>{I18n.t('current_language')}</Text>
+                <Text style={[styles.currentLanguage]}>{i18n.t('current_language')}</Text>
                 <Text style={[styles.currentLanguage]}>
-                    {selectedLanguageCode === 'en' ? 
-                        I18n.t('language_english') : I18n.t('language_spanish')}
+                    {selectedLanguageCode === 'es' ? 
+                        i18n.t('language_spanish') : i18n.t('language_english')}
                 </Text>
             </View>
         </>
     );
 }
-class SettingsScreen extends React.Component {
 
-    render() {
-        return (
-            <LanguageButtonsComponent></LanguageButtonsComponent>
-        );
-    }
+const Settings = () => {
+
+    return (
+        <LanguageButtonsComponent></LanguageButtonsComponent>
+    );
 }
 
-export default SettingsScreen;
+export default Settings;

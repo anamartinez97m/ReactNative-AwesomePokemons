@@ -1,6 +1,7 @@
 import React, {FC, ReactElement, useState} from 'react';
 import {
   Alert,
+  Animated,
   Image,
     Text,
     TextInput,
@@ -10,13 +11,13 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { openDatabase } from 'react-native-sqlite-storage';
 import styles from './Styles';
-import I18n from './i18n/i18n';
+import i18n from './i18n/i18n';
 
 const db = openDatabase({ name: 'UserDatabase.db' });
 
-export const UserLogin: FC<{}> = ({}): ReactElement => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+export const UserLogin = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigation = useNavigation();
 
@@ -25,12 +26,12 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
     const passwordValue: string = password;
 
     if (!usernameValue) {
-      Alert.alert(I18n.t('fill_username'));
+      Alert.alert(i18n.t('fill_username'));
       return;
     }
 
     if (!passwordValue) {
-      Alert.alert(I18n.t('fill_password'));
+      Alert.alert(i18n.t('fill_password'));
       return;
     }
 
@@ -43,7 +44,7 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
           if (len > 0) {
             navigation.navigate('TabNavigator');
           } else {
-            Alert.alert(I18n.t('no_user'));
+            Alert.alert(i18n.t('no_user'));
           }
         }
       );
@@ -63,14 +64,14 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
       <View style={[styles.loginTextInputContainer]}>
         <TextInput
           value={username}
-          placeholder={I18n.t('username')}
+          placeholder={i18n.t('username')}
           onChangeText={(text) => setUsername(text)}
           autoCapitalize={'none'}
           keyboardType={'email-address'}
         />
         <TextInput
           value={password}
-          placeholder={I18n.t('password')}
+          placeholder={i18n.t('password')}
           secureTextEntry
           onChangeText={(text) => setPassword(text)}
           style={[styles.passwordTextInputContainer]}
@@ -79,20 +80,20 @@ export const UserLogin: FC<{}> = ({}): ReactElement => {
         style={[styles.loginButton]} 
         onPress={() => doUserLogin()}>
           <View>
-            <Text style={[styles.loginText]}>{I18n.t('sign_in')}</Text>
+            <Text style={[styles.loginText]}>{i18n.t('sign_in')}</Text>
           </View>
         </TouchableOpacity>
       </View>
       <View>
         <View style={[styles.loginSeparator]}>
-          <Text style={[styles.loginSeparatorText]}>{I18n.t('common_or')}</Text>
+          <Text style={[styles.loginSeparatorText]}>{i18n.t('common_or')}</Text>
         </View>
         <View>
           <TouchableOpacity 
           style={[styles.loginButton]} 
           onPress={() => navigation.navigate('Register')}>
             <View>
-              <Text style={[styles.loginText]}>{I18n.t('create_account')}</Text>
+              <Text style={[styles.loginText]}>{i18n.t('create_account')}</Text>
             </View>
           </TouchableOpacity>
         </View>
