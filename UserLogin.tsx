@@ -1,7 +1,8 @@
-import React, {FC, ReactElement, useState} from 'react';
+import React, {FC, ReactElement, useEffect, useState} from 'react';
 import {
   Alert,
   Animated,
+  Easing,
   Image,
     Text,
     TextInput,
@@ -18,6 +19,20 @@ const db = openDatabase({ name: 'UserDatabase.db' });
 export const UserLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [fadeValue] = useState(() => new Animated.Value(0));
+
+  useEffect(() => {
+    _start();
+  });
+
+  function _start()  {
+    Animated.timing(fadeValue, {
+      toValue: 1,
+      duration: 4000,
+      easing: Easing.linear,
+      useNativeDriver: true
+    }).start();
+  };
 
   const navigation = useNavigation();
 
@@ -54,13 +69,17 @@ export const UserLogin = () => {
 
   return (
     <View style={[styles.loginContainer]}>
-      <Image
-        resizeMode="contain"
-        // todo: for pokemon images from api
-        // source={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
-        source={require('./pokemon_logo.png')}
-        style={[styles.logoImageStyle]}
-      />
+      <Animated.View
+        style={{
+          opacity: fadeValue
+        }}
+        >
+        <Image
+          resizeMode="contain"
+          source={require('./pokemon_logo.png')}
+          style={[styles.logoImageStyle]}
+        />
+      </Animated.View>
       <View style={[styles.loginTextInputContainer]}>
         <TextInput
           value={username}

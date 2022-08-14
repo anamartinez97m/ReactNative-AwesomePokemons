@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "AwesomeLibrary.app"
-               BlueprintName = "AwesomeLibrary"
-               ReferencedContainer = "container:AwesomeLibrary.xcodeproj">
+               BuildableName = "AwesomePokeTeam.app"
+               BlueprintName = "AwesomePokeTeam"
+               ReferencedContainer = "container:AwesomePokeTeam.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "AwesomeLibraryTests.xctest"
-               BlueprintName = "AwesomeLibraryTests"
-               ReferencedContainer = "container:AwesomeLibrary.xcodeproj">
+               BuildableName = "AwesomePokeTeam.xctest"
+               BlueprintName = "AwesomePokeTeam"
+               ReferencedContainer = "container:AwesomePokeTeam.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "AwesomeLibrary.app"
-            BlueprintName = "AwesomeLibrary"
-            ReferencedContainer = "container:AwesomeLibrary.xcodeproj">
+            BuildableName = "AwesomePokeTeam.app"
+            BlueprintName = "AwesomePokeTeam"
+            ReferencedContainer = "container:AwesomePokeTeam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "AwesomeLibrary.app"
-            BlueprintName = "AwesomeLibrary"
-            ReferencedContainer = "container:AwesomeLibrary.xcodeproj">
+            BuildableName = "AwesomePokeTeam.app"
+            BlueprintName = "AwesomePokeTeam"
+            ReferencedContainer = "container:AwesomePokeTeam.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

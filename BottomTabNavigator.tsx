@@ -8,10 +8,12 @@ import Settings from './Settings';
 import { FlatList, SafeAreaView, SectionList, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 import styles from './Styles';
 import { Home } from './Home';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
 
 function HomeScreen() {
+	const [languageFromCache, setLanguageFromCache] = useState('');
 	const [isLoading, setLoading] = useState(true);
 	const [categoryData, setCategoryData] = useState([]);
 	const [pokemonsData, setPokemonsData] = useState([]);
@@ -32,11 +34,25 @@ function HomeScreen() {
 				const elementId = (element.url.match(regex)).toString().slice(1);
 
 				// await getPokemonsByCategoryId(elementId);
-				getPokemonsByCategoryId(elementId);
+				// getPokemonsByCategoryId(elementId);
 				// console.log(subsectionData);
+				
+				let elementName = '';
+				// if (languageFromCache === 'es') {
+				// 	const spanishName = element.names.find((elem: any) => {
+				// 		let nameToReturn = '';
+				// 		if(elem.language.name === 'es') {
+				// 			nameToReturn = elem.name;
+				// 		}
+				// 		return nameToReturn;
+				// 	})
+				// 	elementName = spanishName?.name;
+				// } else {
+					elementName = element.name;
+				// }
  				sectionData.push({
 					id: elementId,
-					title: element.name, 
+					title: elementName, 
 					// data: subsectionData
 					data: ['hola','hey','hello','hi','holiwi','saludos','good morning','good night','bye']
 				});
@@ -74,7 +90,10 @@ function HomeScreen() {
 	}
 
 	useEffect(() => {
-		getPokemonTypes();
+		AsyncStorage.getItem('language').then(async (value) => {
+			setLanguageFromCache(value ? value : '');
+			getPokemonTypes();
+		});		
 	}, []);
 
 	const Item: React.FunctionComponent<any> = ({ item, onPress, backgroundColor, textColor }) => (

@@ -1,4 +1,4 @@
-package com.awesomelibrary.newarchitecture;
+package com.awesomepoketeam.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.awesomelibrary.BuildConfig;
-import com.awesomelibrary.newarchitecture.components.MainComponentsRegistry;
-import com.awesomelibrary.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.awesomepoketeam.BuildConfig;
+import com.awesomepoketeam.newarchitecture.components.MainComponentsRegistry;
+import com.awesomepoketeam.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
