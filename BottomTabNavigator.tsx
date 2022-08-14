@@ -93,7 +93,7 @@ function HomeScreen() {
 		AsyncStorage.getItem('language').then(async (value) => {
 			setLanguageFromCache(value ? value : '');
 			getPokemonTypes();
-		});		
+		});
 	}, []);
 
 	const Item: React.FunctionComponent<any> = ({ item, onPress, backgroundColor, textColor }) => (

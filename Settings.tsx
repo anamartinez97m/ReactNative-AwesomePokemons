@@ -10,6 +10,8 @@ import RNRestart from 'react-native-restart';
 
 const LanguageButtonsComponent: React.FunctionComponent = () => {
     const [selectedLanguageCode, setSelectedLanguageCode] = useState('');
+    const [currentLanguage, setCurrentLanguage] = useState('');
+
     const [selectLanguageAnimation] = useState(() => new Animated.Value(0));
     const [englishButtonAnimation] = useState(() => new Animated.Value(0));
     const [spanishButtonAnimation] = useState(() => new Animated.Value(0));
@@ -42,6 +44,16 @@ const LanguageButtonsComponent: React.FunctionComponent = () => {
     });
 
     useEffect(() => {
+        AsyncStorage.getItem('language').then((value) => {
+            if (value === 'es') {
+                setCurrentLanguage(i18n.t('language_spanish'));
+            } else if (value === 'en') {
+                setCurrentLanguage(i18n.t('language_english'));
+            } else {
+                setCurrentLanguage(i18n.t('language_spanish'));
+            }
+		});
+
         const createAnimation = 
             (value: Animated.Value | Animated.ValueXY, 
             duration: number, 
@@ -127,10 +139,7 @@ const LanguageButtonsComponent: React.FunctionComponent = () => {
                         transform: [{scale: scaleText3}]
                     }}
                 >
-                    <Text style={[styles.currentLanguage]}>
-                        {selectedLanguageCode === 'es' ? 
-                            i18n.t('language_spanish') : i18n.t('language_english')}
-                    </Text>
+                    <Text style={[styles.currentLanguage]}>{currentLanguage}</Text>
                 </Animated.View>
             </View>
         </>
