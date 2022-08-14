@@ -29,7 +29,7 @@ export const App = () => {
 	const [languageFromCache, setLanguageFromCache] = useState('');
 
 	useEffect(() => {
-		AsyncStorage.getItem('language').then((value) => /*changeLanguage(value)*/{
+		AsyncStorage.getItem('language').then((value) => {
 			i18n.locale = value;
 			setLanguageFromCache(value? value : '');
 		});
@@ -50,16 +50,10 @@ export const App = () => {
 		  	);
 		});
 	});
-	
-	// const isDarkMode = useColorScheme() === 'dark';
-
-	// const backgroundStyle = {
-	// 	backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-	// };
 
 	return (
 		<NavigationContainer>
-			<Text>Idioma de la caché: {languageFromCache}</Text>
+			<Text>{i18n.t('cache_language')}{languageFromCache}</Text>
 			<StackNavigator></StackNavigator>
 		</NavigationContainer>
 	);

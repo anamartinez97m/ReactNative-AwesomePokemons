@@ -16,5 +16,6 @@ export default {
     select_language: 'Select the language!',
     language_spanish: 'Spanish',
     language_english: 'English',
-    current_language: 'Current selected language:'
+    current_language: 'Current selected language:',
+    cache_language: 'Cache language: '
 };

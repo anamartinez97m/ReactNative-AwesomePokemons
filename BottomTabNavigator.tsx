@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 // TODO: not working
 // import HomeScreen from './HomeScreen';
 import i18n from './i18n/i18n';
@@ -169,17 +169,17 @@ export const BottomTabNavigator = () => {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                // tabBarIcon: ({ focused, color, size }) => {
-                    // let iconName = '';
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName = '';
         
-                    // if (route.name === 'Home') {
-                    // 	iconName = focused ? 'information-circle' : 'information-circle-outline';
-                    // } else if (route.name === 'Settings') {
-                    // 	iconName = 'list';
-                    // }
+                    if (route.name === i18n.t('home')) {
+                    	iconName = focused ? 'information-circle' : 'information-circle-outline';
+                    } else if (route.name === i18n.t('settings')) {
+                    	iconName = 'list';
+                    }
         
-                    // return <Ionicons name='list' size={size} color={color} />;
-                // },
+                    return <Ionicons name={iconName} size={size} color={color} />;
+                },
                 tabBarActiveTintColor: 'purple',
                 tabBarInactiveTintColor: 'gray',
                 })
