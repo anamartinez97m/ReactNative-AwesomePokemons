@@ -20,6 +20,7 @@
 
 # Steps for Android emulating
 
+0. First of all, execute: ```npm install```
 1. Plug your Android device with USB Debugging enabled. If device is not found, follow these [instructions](https://reactnative.dev/docs/running-on-device)
 2. On one terminal, execute: ``` npx react-native start ```
 3. On another terminal, execute: ``` npx react-native run-android ```
