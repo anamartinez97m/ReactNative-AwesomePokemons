@@ -19,6 +19,7 @@ function HomeScreen() {
 	const [pokemonsData, setPokemonsData] = useState([]);
 	const [selectedItem, setSelectedItem] = useState(null);
 	const [selectedCategory, setSelectedCategory] = useState(null);
+	const [pokemonImages, setPokemonImages]: any = useState([]);
 	const sectionData: any = [];
 	const subsectionMap: any = [];
 	let subsectionData: any = [];
@@ -54,7 +55,8 @@ function HomeScreen() {
 					id: elementId,
 					title: elementName, 
 					// data: subsectionData
-					data: ['hola','hey','hello','hi','holiwi','saludos','good morning','good night','bye']
+					// data: ['hola','hey','hello','hi','holiwi','saludos','good morning','good night','bye']
+					data: []
 				});
  			});
 			setCategoryData(json && json.results ? sectionData : []);
@@ -65,23 +67,44 @@ function HomeScreen() {
 		}
 	}
 
-	const getPokemonsByCategoryId = async (categoryId: number) => {
+	const openItemsOfSelectedCategory = async (categoryId: number) => {
+		setCategoryData(categoryData);
+		const element: any = categoryData.find((elem: any) => elem.id === categoryId);
+		const newData = await getPokemonsByCategoryId(element);
+
+		console.log(pokemonImages);
+		setCategoryData(categoryData);
+	}
+
+	const getPokemonsByCategoryId = async (category: any) => {
 		try {
 			subsectionData = [];
-			const response = await fetch('https://pokeapi.co/api/v2/type/' + categoryId);
-			const json = await response.json();
-			json.pokemon.forEach((element: any) => {
-				const regex = new RegExp('\\/\\d+');
-				const elementId = (element.pokemon.url.match(regex)).toString().slice(1);
+			let dataIds: number[] = [];
 
-				if (json.pokemon.length !== 0 && subsectionData.length <= 10) {
-					subsectionData.push(element.pokemon.name);
+			const response = await fetch('https://pokeapi.co/api/v2/type/' + category.id);
+			const json = await response.json();
+			json.pokemon.forEach((element: any, index: any) => {
+				if(index < 10) {
+					const regex = new RegExp('\\/\\d+');
+					const elementId = (element.pokemon.url.match(regex)).toString().slice(1);
+					dataIds.push(elementId);
+					if (json.pokemon.length !== 0 && subsectionData.length <= 10) {
+						subsectionData.push(element.pokemon);
+					}
 				}
 			});
-			// subsectionMap.push({
-			// 	[categoryId]: subsectionData
-			// });
-			// setPokemonsData(json && json.pokemon ? subsectionData : []);
+			console.log('dataids ', dataIds);
+			dataIds.forEach(async (id) => {
+				const pokemonDetailResponse = await fetch('https://pokeapi.co/api/v2/pokemon/' + id);
+				const detailJson = await pokemonDetailResponse.json();
+				pokemonImages.push(detailJson.sprites?.other?.home?.front_default);
+			});
+			setPokemonImages(pokemonImages);
+
+			subsectionData?.forEach((pokemon: any) => {
+				category?.data.push(pokemon.name);
+			});
+			return subsectionData;
 		} catch (error) {
 			console.error(error);
 		} finally {
@@ -95,6 +118,13 @@ function HomeScreen() {
 			getPokemonTypes();
 		});
 	}, []);
+
+	// useEffect(() => {
+	// 	console.log(categoryData);
+	// 	categoryData.forEach((elem: any) => {
+			
+	// 	});
+	// });
 
 	const Item: React.FunctionComponent<any> = ({ item, onPress, backgroundColor, textColor }) => (
 		<TouchableOpacity onPress={onPress} style={[styles.item, backgroundColor]}>
@@ -128,7 +158,7 @@ function HomeScreen() {
 			<>
 				<HeaderItem
 					section={section}
-					onPress={() => setSelectedCategory(section.id)}
+					onPress={() => {setSelectedCategory(section.id); openItemsOfSelectedCategory(section.id);}}
 					backgroundColor={{ backgroundColor }}
 					textColor={{ color }}
 				/>
@@ -148,9 +178,7 @@ function HomeScreen() {
 				sections={categoryData}
 				keyExtractor={(index) => index}
 				renderSectionHeader={renderHeader}
-				renderItem={({ item, section }) => {
-					return null;
-				}}
+				renderItem={() => {return null;}}
 			/>
 		</View>
 	);

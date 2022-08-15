@@ -16,14 +16,6 @@ import { Text } from 'react-native';
 
 const db = openDatabase({ name: 'UserDatabase.db' });
 
-const changeLanguage = async (lang: any) => {
-	console.log('i18n antes de cambiar: ', i18n.locale);
-	if (i18n.locale !== lang) {
-		i18n.locale = lang;
-		console.log('i18n despues de cambiar: ', i18n.locale);
-	}
-};
-
 export const App = () => {
 
 	const [languageFromCache, setLanguageFromCache] = useState('');
