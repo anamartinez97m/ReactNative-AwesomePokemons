@@ -4,7 +4,7 @@
 
 1. Install node
 2. Install watchman
-   Linux and macOS:
+   (Linux and macOS):
    1. Download and extract the release for your system from the [latest release](https://github.com/facebook/watchman/releases/tag/v2022.08.15.00)
    2.  
     ```
@@ -16,7 +16,7 @@
     $ sudo chmod 755 /usr/local/bin/watchman
     $ sudo chmod 2777 /usr/local/var/run/watchman 
     ```
-3. Install npx
+3. Install npx: ```npm install -g npx```
 
 # Steps for Android emulating
 
