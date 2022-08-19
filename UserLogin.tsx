@@ -13,10 +13,13 @@ import { useNavigation } from '@react-navigation/native';
 import { openDatabase } from 'react-native-sqlite-storage';
 import styles from './Styles';
 import i18n from './i18n/i18n';
+import { NativeModules } from 'react-native';
 
 const db = openDatabase({ name: 'UserDatabase.db' });
 
 export const UserLogin = () => {
+
+  const { PokeTeamToast } = NativeModules;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [fadeValue] = useState(() => new Animated.Value(0));
@@ -57,6 +60,7 @@ export const UserLogin = () => {
         (tx: any, results: any) => {
           var len = results.rows.length;
           if (len > 0) {
+            PokeTeamToast.show('hola', PokeTeamToast.SHORT);
             navigation.navigate('TabNavigator');
           } else {
             Alert.alert(i18n.t('no_user'));
