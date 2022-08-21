@@ -21,7 +21,7 @@ export const App = () => {
 	useEffect(() => {
 		AsyncStorage.getItem('language').then((value) => {
 			i18n.locale = value;
-			setLanguageFromCache(value? value : '');
+			setLanguageFromCache(value? value : 'es');
 		});
 		
 		db.transaction((txn: any) => {
@@ -43,7 +43,6 @@ export const App = () => {
 
 	return (
 		<NavigationContainer>
-			<Text>{i18n.t('cache_language')}{languageFromCache}</Text>
 			<StackNavigator></StackNavigator>
 		</NavigationContainer>
 	);

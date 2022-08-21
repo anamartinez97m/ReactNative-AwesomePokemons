@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     loginButton: {
         height: 40,
         width: ScreenWidth * 0.9,
-        backgroundColor: "#25a9e2",
+        backgroundColor: "purple",
         borderRadius: 8,
         alignItems: "center",
         justifyContent: "center",
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     languageButton: {
         height: 40,
         width: ScreenWidth * 0.9,
-        backgroundColor: "#25a9e2",
+        backgroundColor: "purple",
         borderRadius: 8,
         alignItems: "center",
         justifyContent: "center",
