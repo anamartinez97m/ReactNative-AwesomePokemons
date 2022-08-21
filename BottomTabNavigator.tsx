@@ -54,7 +54,7 @@ function HomeScreen() {
 					const elementId = (element.pokemon.url.match(regex)).toString().slice(1);
 					dataIds.push(elementId);
 					if (json.pokemon.length !== 0 && subsectionData.length <= 10) {
-						subsectionData.push(element.pokemon.name);
+						subsectionData.push(capitalizeFirstLetter(element.pokemon.name));
 					}
 				}
 			});
@@ -130,6 +130,10 @@ function HomeScreen() {
 			/>
 		</View>
 	);
+}
+
+function capitalizeFirstLetter(str: string) {
+	return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 export const BottomTabNavigator = () => {

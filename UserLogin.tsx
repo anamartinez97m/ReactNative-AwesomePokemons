@@ -19,7 +19,7 @@ const db = openDatabase({ name: 'UserDatabase.db' });
 
 export const UserLogin = () => {
 
-  const { PokeTeamToast } = NativeModules;
+  const { PokemonsToast } = NativeModules;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [fadeValue] = useState(() => new Animated.Value(0));
@@ -60,7 +60,7 @@ export const UserLogin = () => {
         (tx: any, results: any) => {
           var len = results.rows.length;
           if (len > 0) {
-            PokeTeamToast.show(i18n.t('welcomeToast', {username: usernameValue}), PokeTeamToast.SHORT);
+            PokemonsToast.show(i18n.t('welcomeToast', {username: usernameValue}), PokemonsToast.SHORT);
             navigation.navigate('TabNavigator');
           } else {
             Alert.alert(i18n.t('no_user'));

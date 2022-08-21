@@ -10,7 +10,7 @@ const db = openDatabase({ name: 'UserDatabase.db' });
 
 export const UserRegistration = () => {
 
-  const { PokeTeamToast } = NativeModules;
+  const { PokemonsToast } = NativeModules;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -43,7 +43,7 @@ export const UserRegistration = () => {
                 {
                   text: 'Ok',
                   onPress: () => {
-                    PokeTeamToast.show(i18n.t('welcomeToast', {username: usernameValue}), PokeTeamToast.SHORT);
+                    PokemonsToast.show(i18n.t('welcomeToast', {username: usernameValue}), PokemonsToast.SHORT);
                     navigation.navigate('TabNavigator');
                   },
                 },

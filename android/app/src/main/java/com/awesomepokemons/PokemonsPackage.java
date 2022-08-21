@@ -1,4 +1,4 @@
-package com.awesomepoketeam;
+package com.awesomepokemons;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class PokeTeamPackage implements ReactPackage {
+public class PokemonsPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {

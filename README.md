@@ -1,4 +1,4 @@
-## Awesome PokeTeam
+## Awesome Pokemons
 
 # Steps for Android installation
 

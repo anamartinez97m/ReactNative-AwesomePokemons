@@ -9,7 +9,7 @@ export default {
     sign_in: 'Sign in',
     common_or: 'or',
     create_account: 'Create an account',
-    sign_up: 'Registrar',
+    sign_up: 'Register',
     registration_failed: 'Registration failed',
     success: 'Success',
     registration_correct: 'You are Registered Successfully',

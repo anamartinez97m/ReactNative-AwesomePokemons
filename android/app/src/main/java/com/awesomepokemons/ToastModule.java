@@ -1,4 +1,4 @@
-package com.awesomepoketeam;
+package com.awesomepokemons;
 
 import android.widget.Toast;
 
@@ -21,7 +21,7 @@ public class ToastModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "PokeTeamToast";
+        return "PokemonsToast";
     }
 
     @Override
