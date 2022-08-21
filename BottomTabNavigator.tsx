@@ -26,6 +26,20 @@ function HomeScreen() {
 				const regex = new RegExp('\\/\\d+');
 				const elementId = (element.url.match(regex)).toString().slice(1);
 				
+				let elementName = '';
+				if (languageFromCache === 'es') {
+					const spanishName = element.names.find((elem: any) => {
+						let nameToReturn = '';
+						if(elem.language.name === 'es') {
+							nameToReturn = elem.name;
+						}
+						return nameToReturn;
+					})
+					elementName = spanishName?.name;
+				} else {
+					elementName = element.name;
+				}
+
  				sectionData.push({
 					id: elementId,
 					title: element.name, 
@@ -145,7 +159,7 @@ export const BottomTabNavigator = () => {
                     let iconName = '';
         
                     if (route.name === i18n.t('home')) {
-                    	iconName = focused ? 'information-circle' : 'information-circle-outline';
+                    	iconName = focused ? 'home' : 'home-outline';
                     } else if (route.name === i18n.t('settings')) {
                     	iconName = 'list';
                     }
