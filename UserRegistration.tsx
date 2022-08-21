@@ -4,10 +4,13 @@ import { useNavigation } from '@react-navigation/native';
 import { openDatabase } from 'react-native-sqlite-storage';
 import styles from './Styles';
 import i18n from './i18n/i18n';
+import { NativeModules } from 'react-native';
 
 const db = openDatabase({ name: 'UserDatabase.db' });
 
 export const UserRegistration = () => {
+
+  const { PokeTeamToast } = NativeModules;
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -32,7 +35,6 @@ export const UserRegistration = () => {
         'INSERT INTO table_user (username, password) VALUES (?,?)',
         [username, password],
         (tx: any, results: any) => {
-          // console.log('Results', results.rowsAffected);
           if (results.rowsAffected > 0) {
             Alert.alert(
               i18n.t('success'),
@@ -40,7 +42,10 @@ export const UserRegistration = () => {
               [
                 {
                   text: 'Ok',
-                  onPress: () => navigation.navigate('TabNavigator'),
+                  onPress: () => {
+                    PokeTeamToast.show(i18n.t('welcomeToast', {username: usernameValue}), PokeTeamToast.SHORT);
+                    navigation.navigate('TabNavigator');
+                  },
                 },
               ],
               { cancelable: false }
