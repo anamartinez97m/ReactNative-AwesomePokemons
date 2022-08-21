@@ -60,7 +60,7 @@ export const UserLogin = () => {
         (tx: any, results: any) => {
           var len = results.rows.length;
           if (len > 0) {
-            PokeTeamToast.show('hola', PokeTeamToast.SHORT);
+            PokeTeamToast.show(i18n.t('welcomeToast', {username: usernameValue}), PokeTeamToast.SHORT);
             navigation.navigate('TabNavigator');
           } else {
             Alert.alert(i18n.t('no_user'));

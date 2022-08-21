@@ -17,5 +17,6 @@ export default {
     language_spanish: 'Spanish',
     language_english: 'English',
     current_language: 'Current selected language:',
-    cache_language: 'Cache language: '
+    cache_language: 'Cache language: ',
+    welcomeToast: 'Welcome %{username}'
 };
