@@ -1,10 +1,7 @@
-import React, { Component, useContext, useEffect, useState } from 'react';
-import { Animated, Easing, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Animated, Easing, Text, TouchableOpacity, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { Updates } from 'expo';
 import i18n from './i18n/i18n';
-import en from './i18n/locales/en';
-import es from './i18n/locales/es';
 import styles from './Styles';
 import RNRestart from 'react-native-restart';
 

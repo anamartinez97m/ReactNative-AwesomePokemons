@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-// TODO: not working
-// import HomeScreen from './HomeScreen';
 import i18n from './i18n/i18n';
 import Settings from './Settings';
-import { FlatList, SafeAreaView, SectionList, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, SectionList, Text, TouchableOpacity, View } from 'react-native';
 import styles from './Styles';
-import { Home } from './Home';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Tab = createBottomTabNavigator();
@@ -29,23 +26,9 @@ function HomeScreen() {
 				const regex = new RegExp('\\/\\d+');
 				const elementId = (element.url.match(regex)).toString().slice(1);
 				
-				let elementName = '';
-				// if (languageFromCache === 'es') {
-				// 	const spanishName = element.names.find((elem: any) => {
-				// 		let nameToReturn = '';
-				// 		if(elem.language.name === 'es') {
-				// 			nameToReturn = elem.name;
-				// 		}
-				// 		return nameToReturn;
-				// 	})
-				// 	elementName = spanishName?.name;
-				// } else {
-					elementName = element.name;
-				// }
-				
  				sectionData.push({
 					id: elementId,
-					title: elementName, 
+					title: element.name, 
 					data: await getPokemonsByCategoryId(elementId)
 				});
  			}));
@@ -147,14 +130,6 @@ function HomeScreen() {
 			/>
 		</View>
 	);
-	// return (
-	// 	<>
-	// 		<StatusBar />
-	// 		<SafeAreaView>
-	// 			<Home />
-	// 		</SafeAreaView>
-	// 	</>
-	// );
 }
 
 export const BottomTabNavigator = () => {

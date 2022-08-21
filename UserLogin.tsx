@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Alert,
   Animated,

@@ -4,10 +4,8 @@
  * @format
  */
 
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
-import { Ionicons } from '@expo/vector-icons';
 import i18n from './i18n/i18n';
 import { openDatabase } from 'react-native-sqlite-storage';
 import AsyncStorage from '@react-native-async-storage/async-storage';
