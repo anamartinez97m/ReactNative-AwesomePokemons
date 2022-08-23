@@ -47,7 +47,7 @@ const LanguageButtonsComponent: React.FunctionComponent = () => {
             } else if (value === 'en') {
                 setCurrentLanguage(i18n.t('language_english'));
             } else {
-                setCurrentLanguage(i18n.t('language_spanish'));
+                setCurrentLanguage(i18n.t('no_cache_language'));
             }
 		});
 

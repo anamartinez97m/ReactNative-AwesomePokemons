@@ -27,7 +27,7 @@ function HomeScreen() {
 				const elementId = (element.url.match(regex)).toString().slice(1);
 				
 				let elementName = '';
-				if (languageFromCache === 'es') {
+				/*if (languageFromCache === 'es') {
 					const spanishName = element.names.find((elem: any) => {
 						let nameToReturn = '';
 						if(elem.language.name === 'es') {
@@ -38,7 +38,7 @@ function HomeScreen() {
 					elementName = spanishName?.name;
 				} else {
 					elementName = element.name;
-				}
+				}*/
 
  				sectionData.push({
 					id: elementId,

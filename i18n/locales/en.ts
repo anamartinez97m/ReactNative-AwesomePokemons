@@ -18,5 +18,6 @@ export default {
     language_english: 'English',
     current_language: 'Current selected language:',
     cache_language: 'Cache language: ',
-    welcomeToast: 'Welcome %{username}'
+    welcomeToast: 'Welcome %{username}',
+    no_cache_language: 'There is no cached language yet'
 };

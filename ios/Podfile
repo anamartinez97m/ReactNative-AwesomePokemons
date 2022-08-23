@@ -12,6 +12,8 @@ target 'AwesomePokemons' do
   # Flags change depending on the env values.
   flags = get_default_flags()
 
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
@@ -23,10 +25,7 @@ target 'AwesomePokemons' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'AwesomePokemons' do
-    inherit! :complete
-    # Pods for testing
-  end
+  # use_flipper!({ 'Flipper' => '0.161.0' })
 
   post_install do |installer|
     react_native_post_install(installer)
