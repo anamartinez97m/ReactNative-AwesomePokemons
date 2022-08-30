@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import i18n from './i18n/i18n';
 
-const Context = React.createContext(undefined);
+const Context = React.createContext('es');
 
-export const Provider = ({children}: any) => {
+const Provider = ({children}: any) => {
     const [language, setLanguage] = useState(i18n.locale)
 
     useEffect(()=> {
